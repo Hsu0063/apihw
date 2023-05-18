@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google map</title>
+    <script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGA_Kg5KAGc2YuugmP_bjVGOQlN7x4-6Y&callback=initMap"></script>
+    <style>
+        #map {
+            width: 800px;
+            height: 600px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id = "map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  const uluru = { lat: 25.05242657488617, lng: 121.51061461297367 };
+  // The map, centered at Uluru
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const img = "./img/placeholder.png"
+  for(let i = 0; i < locations.length; i++){
+    const marker = new google.maps.Marker({
+    position: locations[i],
+    map: map,
+    title: pos[i],
+    icon: img
+    });
+
+    const infowindow = new google.maps.InfoWindow({
+    content:pos[i],
+    ariaLabel: pos[i],
+  });
+  marker.addListener("click", () => {
+    infowindow.open({
+      anchor: marker,
+      map,
+    });
+  });
+
+  }
+}
+
+const pos = ["移動甜點工作室", "玩蟒人生", "貓妝咖啡館", "茗香園冰室", "麵屋千雲"]
+const locations = [
+    { lat: 25.05242657488617, lng: 121.51061461297367 },
+    { lat: 25.062834155275144, lng: 121.5133909643383 }, 
+    { lat: 25.05072605988477, lng: 121.51969740240051 }, 
+    { lat: 25.05203225097186, lng: 121.52012710994019 },
+    { lat: 25.050387597055785, lng: 121.52521433576004 }
+];
+
+
+
+window.initMap = initMap;
+    </script>
+</body>
+</html>
